@@ -1,0 +1,6 @@
+{
+  "appTitle": "test_flutter_firebase",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}

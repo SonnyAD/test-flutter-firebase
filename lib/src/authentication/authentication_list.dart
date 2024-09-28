@@ -33,25 +33,6 @@ class _AuthenticationListViewState extends State<AuthenticationListView> {
           .map<Widget>((v) =>
               CustomAuthenticationListButton(name: v.name, svgLogo: v.logo))
           .toList(),
-      /*itemBuilder: (BuildContext context, int index) {
-        final item = items[index];
-
-        return ListTile(
-          title: Text('Sign in with ${item.name}'),
-          leading: SvgPicture.asset(
-            item.logo,
-            semanticsLabel: 'Sign in with ${item.name}',
-          ),
-          onTap: () async {
-            userCredential.value = await signInWithGoogle();
-            if (userCredential.value != null) {
-              print(userCredential.value.user!.email);
-              Navigator.pushNamedAndRemoveUntil(
-                  context, HomePage.routeName, (r) => false);
-            }
-          },
-        );
-      },*/
     );
   }
 }
@@ -122,7 +103,6 @@ Future<dynamic> signInWithGoogle() async {
 
     return await FirebaseAuth.instance.signInWithCredential(credential);
   } on Exception catch (e) {
-    // TODO
     print('exception->$e');
   }
 }

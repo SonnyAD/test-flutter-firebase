@@ -13,3 +13,9 @@ flutter run -d chrome
 ```bash
 flutter build web
 ```
+
+## Deploy
+
+```bash
+firebase deploy
+```

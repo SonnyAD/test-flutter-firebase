@@ -69,7 +69,7 @@ class SettingsView extends StatelessWidget {
                   children: [
                     Icon(Icons.logout),
                     Text(
-                        'Log out (${FirebaseAuth.instance.currentUser?.email})')
+                        'Log out (${FirebaseAuth.instance.currentUser?.email}, email ${FirebaseAuth.instance.currentUser!.emailVerified ? '' : 'not '}verified)')
                   ],
                 ))
           ]),

@@ -21,64 +21,122 @@ class AuthenticationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Container(),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth > 600) {
+            return _buildWideContainers();
+          } else {
+            return _buildNormalContainers();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _buildNormalContainers() {
+    return Column(
+      children: [
+        const SizedBox(height: 20.0),
+        GradientText(
+          'Welcome!',
+          style: TextStyle(
+            fontSize: 40,
           ),
-          Expanded(
-            flex: 6,
-            child: Column(
+          colors: [
+            const Color(0xFF00DBDE),
+            const Color(0xFFFC00FF),
+          ],
+        ),
+        const SizedBox(height: 20.0),
+        AuthenticationForm(
+            mode: mode != Mode.signUp.name ? Mode.signIn : Mode.signUp),
+        if (mode != Mode.signUp.name)
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(height: 20.0),
-                GradientText(
-                  'Welcome!',
-                  style: TextStyle(
-                    fontSize: 40,
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                    indent: 10,
+                    endIndent: 10,
                   ),
-                  colors: [
-                    const Color(0xFF00DBDE),
-                    const Color(0xFFFC00FF),
-                  ],
                 ),
-                const SizedBox(height: 20.0),
-                AuthenticationForm(
-                    mode: mode != Mode.signUp.name ? Mode.signIn : Mode.signUp),
-                if (mode != Mode.signUp.name)
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            color: Colors.grey,
-                            indent: 10,
-                            endIndent: 10,
-                          ),
-                        ),
-                        Text(' or '),
-                        Expanded(
-                          child: Divider(
-                            color: Colors.grey,
-                            indent: 10,
-                            endIndent: 10,
-                          ),
-                        ),
-                      ],
-                    ),
+                Text(' or '),
+                Expanded(
+                  child: Divider(
+                    color: Colors.grey,
+                    indent: 10,
+                    endIndent: 10,
                   ),
-                if (mode != Mode.signUp.name) AuthenticationListView(),
+                ),
               ],
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Container(),
+        if (mode != Mode.signUp.name) AuthenticationListView(),
+      ],
+    );
+  }
+
+  Widget _buildWideContainers() {
+    return Row(
+      children: [
+        Expanded(
+          flex: 2,
+          child: Container(),
+        ),
+        Expanded(
+          flex: 6,
+          child: Column(
+            children: [
+              const SizedBox(height: 20.0),
+              GradientText(
+                'Welcome!',
+                style: TextStyle(
+                  fontSize: 40,
+                ),
+                colors: [
+                  const Color(0xFF00DBDE),
+                  const Color(0xFFFC00FF),
+                ],
+              ),
+              const SizedBox(height: 20.0),
+              AuthenticationForm(
+                  mode: mode != Mode.signUp.name ? Mode.signIn : Mode.signUp),
+              if (mode != Mode.signUp.name)
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey,
+                          indent: 10,
+                          endIndent: 10,
+                        ),
+                      ),
+                      Text(' or '),
+                      Expanded(
+                        child: Divider(
+                          color: Colors.grey,
+                          indent: 10,
+                          endIndent: 10,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              if (mode != Mode.signUp.name) AuthenticationListView(),
+            ],
           ),
-        ],
-      ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Container(),
+        ),
+      ],
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:test_flutter_firebase/src/authentication/authentication_page.dart';
+import 'package:test_flutter_firebase/src/password/password_page.dart';
 
 import '../home/home.dart';
 
@@ -160,16 +161,44 @@ class AuthenticationFormState extends State<AuthenticationForm> {
                     validator: emailValidator,
                     onChanged: onChanged,
                   ),
-                  TextFormField(
-                    autocorrect: false,
-                    controller: passwordController,
-                    autofocus: false,
-                    enableSuggestions: false,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                    ),
-                    validator: passwordValidator,
+                  Stack(
+                    children: [
+                      TextFormField(
+                        autocorrect: false,
+                        controller: passwordController,
+                        autofocus: false,
+                        enableSuggestions: false,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                        ),
+                        validator: passwordValidator,
+                      ),
+                      Positioned(
+                        right: 0,
+                        bottom: 10,
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Forgot password?',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  decoration: TextDecoration.underline,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Navigator.restorablePushNamed(
+                                      context,
+                                      PasswordPage.routeName,
+                                    );
+                                  },
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                   const SizedBox(height: 20.0),
                   if (isLoading)

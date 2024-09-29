@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:test_flutter_firebase/src/home/home.dart';
+import 'package:test_flutter_firebase/src/password/password_page.dart';
 
 import 'authentication/authentication_page.dart';
 import 'settings/settings_controller.dart';
@@ -73,6 +74,8 @@ class MyApp extends StatelessWidget {
                     return SettingsView(controller: settingsController);
                   case HomePage.routeName:
                     return const HomePage();
+                  case PasswordPage.routeName:
+                    return const PasswordPage();
                   case AuthenticationPage.routeName:
                   default:
                     final args = routeSettings.arguments != null
